@@ -1,4 +1,5 @@
-import { useFormContext, Controller } from "react-hook-form";
+import { Controller, useFormContext } from "react-hook-form";
+
 import Label from "@/components/form/Label";
 import Input from "@/components/form/input/InputField";
 
@@ -19,13 +20,15 @@ export function BasicInput({
     control,
     formState: { errors },
   } = useFormContext();
+
   const errorMessage = errors[name]?.message;
 
   return (
     <div>
       <Label>
-        {label} <span className="text-error-500">*</span>
+        {label}
       </Label>
+
       <Controller
         name={name}
         control={control}
@@ -36,8 +39,18 @@ export function BasicInput({
             type={type}
             placeholder={placeholder}
             value={field.value ?? ""}
-            onChange={field.onChange}
             onBlur={field.onBlur}
+            onChange={(e) => {
+              if (type === "number") {
+                const value = e.target.value;
+
+                field.onChange(value === "" ? undefined : Number(value));
+
+                return;
+              }
+
+              field.onChange(e);
+            }}
             error={Boolean(errorMessage)}
             hint={typeof errorMessage === "string" ? errorMessage : undefined}
           />

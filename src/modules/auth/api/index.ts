@@ -1,5 +1,6 @@
 import { createApi } from "@reduxjs/toolkit/query/react";
 import { baseQueryWithAuth } from "@/modules/shared/api/base-query";
+import { CreateUserDto } from "./dtos/create-user.dto";
 import { LoginDto } from "./dtos/login.dto";
 import { LoginResponseDto } from "./dtos/login-response.dto";
 import { UserDto } from "./dtos/user.dto";
@@ -16,6 +17,13 @@ export const authApi = createApi({
         body,
       }),
     }),
+    register: builder.mutation<void, CreateUserDto>({
+      query: (body) => ({
+        url: "/user",
+        method: "POST",
+        body,
+      }),
+    }),
     getCurrentUser: builder.query<UserDto, void>({
       query: () => "/user/",
       providesTags: ["User"],
@@ -23,4 +31,8 @@ export const authApi = createApi({
   }),
 });
 
-export const { useLoginMutation, useGetCurrentUserQuery } = authApi;
+export const {
+  useLoginMutation,
+  useRegisterMutation,
+  useGetCurrentUserQuery,
+} = authApi;
