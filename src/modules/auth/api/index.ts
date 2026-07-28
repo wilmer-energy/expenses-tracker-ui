@@ -4,6 +4,8 @@ import { CreateUserDto } from "./dtos/create-user.dto";
 import { LoginDto } from "./dtos/login.dto";
 import { LoginResponseDto } from "./dtos/login-response.dto";
 import { UserDto } from "./dtos/user.dto";
+import { ForgotPasswordDto } from "./dtos/forgot-password.to";
+import { ResetPasswordDto } from "./dtos/reset-password.to";
 
 export const authApi = createApi({
   reducerPath: "authApi",
@@ -13,6 +15,20 @@ export const authApi = createApi({
     login: builder.mutation<LoginResponseDto, LoginDto>({
       query: (body) => ({
         url: "/user/login",
+        method: "POST",
+        body,
+      }),
+    }),
+    forgotPassword: builder.mutation<void, ForgotPasswordDto>({
+      query: (body) => ({
+        url: "/user/forgot-password",
+        method: "POST",
+        body,
+      }),
+    }),
+    resetPassword: builder.mutation<void, ResetPasswordDto>({
+      query: (body) => ({
+        url: "/user/reset-password",
         method: "POST",
         body,
       }),
@@ -35,4 +51,6 @@ export const {
   useLoginMutation,
   useRegisterMutation,
   useGetCurrentUserQuery,
+  useForgotPasswordMutation,
+  useResetPasswordMutation
 } = authApi;

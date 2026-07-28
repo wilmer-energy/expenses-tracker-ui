@@ -57,7 +57,6 @@ export function useDashboard(expenses: ExpenseDto[]): DashboardData {
       category,
       total,
     }));
-    console.log(totalExpensesByCategory);
 
     const categoryTimelines: CategoryTimeline[] = [
       ...timelinesByCategory.entries(),
