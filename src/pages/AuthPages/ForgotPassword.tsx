@@ -6,8 +6,8 @@ export default function ForgotPassword() {
   return (
     <>
       <PageMeta
-        title="React.js SignUp Dashboard | TailAdmin - Next.js Admin Dashboard Template"
-        description="This is React.js SignUp Tables Dashboard page for TailAdmin - React.js Tailwind CSS Admin Dashboard Template"
+        title="Cambiar contraseña"
+        description="Ingresa tu correo para enviarte un código de verificación"
       />
       <AuthLayout>
         <ForgotPasswordForm />

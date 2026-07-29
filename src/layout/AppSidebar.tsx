@@ -20,11 +20,11 @@ type NavItem = {
 const navItems: NavItem[] = [
   {
     icon: <GridIcon />,
-    name: "Dashboard",
+    name: "Inicio",
     path: "/"
   },
   {
-    name: "Tables",
+    name: "Gastos",
     icon: <TableIcon />,
     path: "/basic-tables"
   }
@@ -246,16 +246,16 @@ const AppSidebar: React.FC = () => {
             <>
               <img
                 className="dark:hidden"
-                src="/images/logo/logo.svg"
+                src="/images/logo/auth-logo.png"
                 alt="Logo"
-                width={150}
+                width={200}
                 height={40}
               />
               <img
                 className="hidden dark:block"
-                src="/images/logo/logo-dark.svg"
+                src="/images/logo/logo-blanco.png"
                 alt="Logo"
-                width={150}
+                width={200}
                 height={40}
               />
             </>

@@ -1,6 +1,5 @@
 import { FormProvider } from "react-hook-form";
 import { Link } from "react-router";
-import Checkbox from "@/components/form/input/Checkbox";
 import Button from "@/components/ui/button/Button";
 import { BasicInput } from "@/modules/shared/components/inputs/basic-input";
 import { PasswordInput } from "@/modules/shared/components/inputs/password-input";
@@ -32,19 +31,6 @@ export function SignInForm() {
                 />
                 <PasswordInput name="password" label="Contraseña" />
                 <div className="flex items-center justify-between">
-                  <div className="flex items-center gap-3">
-                    <Checkbox
-                      checked={form.watch("rememberMe")}
-                      onChange={(checked) =>
-                        form.setValue("rememberMe", checked, {
-                          shouldValidate: true,
-                        })
-                      }
-                    />
-                    <span className="block font-normal text-gray-700 text-theme-sm dark:text-gray-400">
-                      Mantener sesión iniciada
-                    </span>
-                  </div>
                   <Link
                     to="/forgot-password"
                     className="text-sm text-brand-500 hover:text-brand-600 dark:text-brand-400"
