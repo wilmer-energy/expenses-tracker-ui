@@ -1,4 +1,4 @@
-import { useMemo } from "react";
+import { useEffect } from "react";
 
 import { useForm } from "react-hook-form";
 
@@ -9,6 +9,14 @@ import { useCreateExpenseMutation, useUpdateExpenseMutation } from "../api";
 import { ExpenseDto } from "../api/dtos/expense.dto";
 
 import { ExpenseFormValues, expenseFormSchema } from "./expense-form.schema";
+import { ExpenseCategory } from "../api/dtos/expense-category";
+
+const defaultValues = {
+  amount: 0,
+  note: "",
+  category: ExpenseCategory.VARIABLE,
+  made_at: "",
+};
 
 export function useExpenseForm(
   expense: ExpenseDto | undefined,
@@ -21,19 +29,20 @@ export function useExpenseForm(
   const form = useForm<ExpenseFormValues>({
     resolver: zodResolver(expenseFormSchema),
     mode: "onChange",
-    defaultValues: useMemo(
-      () => ({
-        amount: expense?.amount ?? 0,
-
-        note: expense?.note ?? "",
-
-        category: expense?.category ?? undefined,
-
-        made_at: expense?.made_at?.substring(0, 10) ?? "",
-      }),
-      [expense],
-    ),
+    defaultValues,
   });
+
+  useEffect(() => {
+    const newValue = expense
+      ? {
+          amount: expense.amount ?? 0,
+          note: expense.note ?? "",
+          category: expense.category ?? undefined,
+          made_at: expense.made_at ? expense.made_at.substring(0, 10) : "",
+        }
+      : defaultValues;
+    form.reset(newValue);
+  }, [expense, form]);
 
   async function submit(values: ExpenseFormValues) {
     const body = {
